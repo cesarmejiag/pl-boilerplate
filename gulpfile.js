@@ -1,13 +1,14 @@
 
-var gulp      = require('gulp'),
-    concat    = require('gulp-concat'),
-    ext       = require('gulp-ext'),
-    minifyCss = require('gulp-minify-css'),
-    tinypng   = require('gulp-tinypng-compress'),
-    uglify    = require('gulp-uglify'),
-    htmlmin   = require('gulp-htmlmin'),
-    favicons  = require("gulp-favicons/es5"),
-    sequence  = require('gulp-sequence');
+var gulp       = require('gulp'),
+    concat     = require('gulp-concat'),
+    ext        = require('gulp-ext'),
+    minifyCss  = require('gulp-minify-css'),
+    tinypng    = require('gulp-tinypng-compress'),
+    uglify     = require('gulp-uglify'),
+    htmlmin    = require('gulp-htmlmin'),
+    favicons   = require("gulp-favicons/es5"),
+    sequence   = require('gulp-sequence'),
+    livereload = require('gulp-livereload');
 
 
 var srcPath = {
@@ -26,6 +27,41 @@ var destPath = {
     root : 'html/'
 };
 
+
+// ---------------------------------------------------------------------
+// | Maintains updated src changes in the browser.                     |
+// ---------------------------------------------------------------------
+
+/**
+ * Reload on change.
+ */
+gulp.task('reload', function() {
+    gulp.src(srcPath.root)
+        .pipe(livereload());
+});
+
+/**
+ * Monitors changes in projects files and apply changes instantly.
+ * Use with livereload chrome extension.
+ * Reference: https://github.com/vohof/gulp-livereload
+ */
+gulp.task('watch', function() {
+    // Files to be watched.
+    var files = [
+        srcPath.root + '*.html',
+        srcPath.css  + '**/*.css',
+        srcPath.js   + '**/*.js'
+    ];
+
+    livereload.listen();
+
+    gulp.watch(files, ['reload']);
+});
+
+
+// ---------------------------------------------------------------------
+// | Build production project.                                         |
+// ---------------------------------------------------------------------
 
 /**
  * Concatenate and minify css files using gulp-minify-css.
