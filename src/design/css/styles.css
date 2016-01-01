@@ -4,3 +4,46 @@
     Author     : cesarmejiaguzman
     Description:
 */
+
+/* Util */
+.holder{
+    margin: 0 auto;
+    max-width: 1010px;
+    width: 100%;
+}
+
+
+/* Navigation */
+.navigation{
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.navigation .navigation-toggle{
+    border: none;
+    float: right;
+    padding: 10px;
+    width: 50px;
+}
+
+.navigation .navigation-toggle .bar{
+    background-color: #333;
+    display: block;
+    height: 3px;
+    margin-bottom: 3px;
+    width: 100%;
+}
+
+.navigation .navigation-toggle .bar:last-child{
+    margin-bottom: 0;
+}
+
+
+/* Outer wrapper */
+.outer-wrapper{
+    background: #eaeaea;
+    position: relative;
+}

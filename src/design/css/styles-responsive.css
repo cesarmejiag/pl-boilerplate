@@ -4,3 +4,63 @@
     Author     : cesarmejiaguzman
     Description:
 */
+
+@media (max-width: 767px) {
+
+    /* Body */
+    body.mobile-navigation-open{
+        overflow: hidden;
+    }
+
+
+    /* Mobile navigation */
+    .mobile-navigation{
+        height: 100%;
+        overflow-y: scroll;
+        position: fixed;
+        right: -250px;
+        top: 0;
+        width: 250px;
+
+        -webkit-transition: right 350ms;
+        -moz-transition: right 350ms;
+        -ms-transition: right 350ms;
+        -o-transition: right 350ms;
+        transition: right 350ms;
+    }
+
+    .mobile-navigation.mobile-navigation-open{
+        right: 0;
+    }
+
+
+    /* Navigation */
+    .navigation{
+        -webkit-transition: right 350ms;
+        -moz-transition: right 350ms;
+        -ms-transition: right 350ms;
+        -o-transition: right 350ms;
+        transition: right 350ms;
+    }
+
+    .navigation.mobile-navigation-open{
+        right: 250px;
+    }
+
+
+    /* Outer wrapper */
+    .outer-wrapper{
+        right: 0;
+
+        -webkit-transition: right 350ms;
+        -moz-transition: right 350ms;
+        -ms-transition: right 350ms;
+        -o-transition: right 350ms;
+        transition: right 350ms;
+    }
+
+    .outer-wrapper.mobile-navigation-open{
+        right: 250px;
+    }
+
+}
