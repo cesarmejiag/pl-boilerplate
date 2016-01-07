@@ -2,7 +2,15 @@
   "name": "goplek-boilerplate",
   "version": "1.0.0",
   "description": "HTML5 boilerplate.",
+  "author": "sexar <iconfidence@gmail.com>",
   "main": "",
+  "contributors": [{
+    "name": "César Mejía Guzmán",
+    "email": "iconfidence@gmail.com"
+  }, {
+    "name": "Daniel Pérez Atanacio",
+    "email": "daniel.perez.atanacio@gmail.com"
+  }],
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.0",
