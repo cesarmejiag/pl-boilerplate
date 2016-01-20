@@ -12,11 +12,11 @@ var gulp       = require('gulp'),
 
 
 var srcPath = {
-    css  : 'src/design/css/',
-    fonts: 'src/design/fonts/',
-    imgs : 'src/design/imgs/',
-    js   : 'src/design/js/',
-    root : 'src/'
+    css  : 'source/design/css/',
+    fonts: 'source/design/fonts/',
+    imgs : 'source/design/imgs/',
+    js   : 'source/design/js/',
+    root : 'source/'
 };
 
 var destPath = {
