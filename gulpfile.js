@@ -90,7 +90,7 @@ gulp.task('css', function() {
  */
 gulp.task('fonts', function() {
     // Source files.
-    var srcFiles = srcPath.fonts + '*.{eot,woff,woff2,ttf,svg}'
+    var srcFiles = srcPath.fonts + '*.{eot,woff,woff2,ttf,svg,otf}';
 
     return gulp.src(srcFiles)
         .pipe(gulp.dest(destPath.fonts));
@@ -133,7 +133,7 @@ gulp.task('js', function() {
     // Output file.
     var outputFile = 'scripts.js';
 
-    return gulp.src(srcPath.js + '/**/*.*')
+    return gulp.src(srcPath.js + '/**/*.js')
         .pipe(concat(outputFile))
         .pipe(uglify())
         .pipe(gulp.dest(destPath.js));
