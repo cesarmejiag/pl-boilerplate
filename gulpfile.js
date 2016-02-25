@@ -79,7 +79,7 @@
         ];
 
         // Output file.
-        var outputFile = 'styles.css';
+        var outputFile = 'styles.min.css';
 
         return gulp.src(srcFiles)
             .pipe(concat(outputFile))
@@ -134,7 +134,7 @@
      */
     gulp.task('js', function() {
         // Output file.
-        var outputFile = 'scripts.js';
+        var outputFile = 'scripts.min.js';
 
         return gulp.src(srcPath.js + '/**/*.js')
             .pipe(concat(outputFile))
@@ -176,6 +176,18 @@
         ];
 
         return gulp.src(srcFiles)
+            .pipe(gulp.dest(destPath.root));
+    });
+
+
+    /**
+     * Copy sitemap.
+     */
+    gulp.task('sitemap', function() {
+        // Source file.
+        var srcFile = srcPath.root + 'sitemap.xml';
+
+        return gulp.src(srcFile)
             .pipe(gulp.dest(destPath.root));
     });
 
