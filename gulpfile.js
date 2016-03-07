@@ -235,7 +235,7 @@
      * @param done
      */
     gulp.task('build', function(done) {
-        sequence('css', 'fonts', 'imgs', 'js', 'html', 'txt', 'favico', done);
+        sequence('css', 'fonts', 'imgs', 'js', 'html', 'txt', 'sitemap', 'favico', done);
     });
 
 

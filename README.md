@@ -2,7 +2,7 @@
 
 
 
-##Snippets for html
+## Snippets for html
 
 ```code
 <!-- Section $name$ -->
