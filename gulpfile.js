@@ -73,7 +73,6 @@
     gulp.task('css', function() {
         // Source files.
         var srcFiles = [
-            srcPath.css + 'vendor/bootstrap.css',
             srcPath.css + 'styles.css',
             srcPath.css + 'styles-responsive.css'
         ];
@@ -85,6 +84,21 @@
             .pipe(concat(outputFile))
             .pipe(minifyCss())
             .pipe(gulp.dest(destPath.css));
+    });
+
+
+    /**
+     * Minify and copy css vendor files.
+     */
+    gulp.task('css-vendor', function() {
+        // Source vendor files
+        var srcFiles = [
+            srcPath.css + 'vendor/**/*.css'
+        ];
+
+        return gulp.src(srcFiles)
+            .pipe(minifyCss())
+            .pipe(gulp.dest(destPath.css + 'vendor'));
     });
 
 
@@ -133,13 +147,34 @@
      *             http://lisperator.net/uglifyjs/
      */
     gulp.task('js', function() {
+        // Source files (avoid vendor)
+        var srcFiles = [
+            '!' + srcPath.js + 'vendor/**/',
+            srcPath.js + '**/*.js'
+        ];
+
         // Output file.
         var outputFile = 'scripts.min.js';
 
-        return gulp.src(srcPath.js + '/**/*.js')
+        return gulp.src(srcFiles)
             .pipe(concat(outputFile))
             .pipe(uglify())
             .pipe(gulp.dest(destPath.js));
+    });
+
+
+    /**
+     * Copy and minify js vendor files.
+     */
+    gulp.task('js-vendor', function() {
+        // Source vendor files
+        var srcFiles = [
+            srcPath.js + 'vendor/**/*.js'
+        ];
+
+        return gulp.src(srcFiles)
+            .pipe(uglify())
+            .pipe(gulp.dest(destPath.js + 'vendor'));
     });
 
 
@@ -235,7 +270,7 @@
      * @param done
      */
     gulp.task('build', function(done) {
-        sequence('css', 'fonts', 'imgs', 'js', 'html', 'txt', 'sitemap', 'favico', done);
+        sequence('css', 'css-vendor', 'fonts', 'imgs', 'js', 'js-vendor', 'html', 'txt', 'sitemap', 'favico', done);
     });
 
 

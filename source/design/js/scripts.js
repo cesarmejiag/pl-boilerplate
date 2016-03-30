@@ -1,5 +1,5 @@
 /**
- * @author cesarmejiaguzman
+ * @author cesarmejia
  */
 
 'use strict';
