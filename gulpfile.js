@@ -185,7 +185,7 @@
      */
     gulp.task('html', function() {
         // Source files.
-        var srcFiles = srcPath.root + '*.html';
+        var srcFiles = srcPath.root + '[!_]*.html';
 
         // Opts
         var opts = {
