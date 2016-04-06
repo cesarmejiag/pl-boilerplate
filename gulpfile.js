@@ -4,7 +4,7 @@
 
     var gulp       = require('gulp'),
         concat     = require('gulp-concat'),
-        ext        = require('gulp-ext'),
+        rename     = require('gulp-rename'),
         minifyCss  = require('gulp-minify-css'),
         tinypng    = require('gulp-tinypng-compress'),
         uglify     = require('gulp-uglify'),
@@ -195,35 +195,22 @@
 
         return gulp.src(srcFiles)
             // .pipe(htmlmin(opts))
-            .pipe(ext.replace('txt', 'html'))
+            .pipe(rename({ extname: '.txt' }))
             .pipe(gulp.dest(destPath.root));
     });
 
 
     /**
-     * Copy robots and humans.
+     * Clone html files adding an underscore in name file.
      */
-    gulp.task('txt', function() {
+    gulp.task('html-dev', function() {
         // Source files.
-        var srcFiles = [
-            srcPath.root + 'robots.txt',
-            srcPath.root + 'humans.txt'
-        ];
+        var srcFiles = srcPath.root + '[!_]*.html';
 
         return gulp.src(srcFiles)
-            .pipe(gulp.dest(destPath.root));
-    });
+            .pipe(rename({ prefix: '_' }))
+            .pipe(gulp.dest(srcPath.root));
 
-
-    /**
-     * Copy sitemap.
-     */
-    gulp.task('sitemap', function() {
-        // Source file.
-        var srcFile = srcPath.root + 'sitemap.xml';
-
-        return gulp.src(srcFile)
-            .pipe(gulp.dest(destPath.root));
     });
 
 
@@ -270,7 +257,7 @@
      * @param done
      */
     gulp.task('build', function(done) {
-        sequence('css', 'css-vendor', 'fonts', 'imgs', 'js', 'js-vendor', 'html', 'txt', 'sitemap', 'favico', done);
+        sequence('css', 'css-vendor', 'fonts', 'imgs', 'js', 'js-vendor', 'html', 'favico', done);
     });
 
 
