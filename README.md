@@ -1,20 +1,20 @@
 # Goplek BoilerPlate
 
 
-
-## Snippets for html
+## PHPStorm Snippet
 
 ```code
-<!-- Section $name$ -->
-<section class="block $name$" id="$name$">
+<!-- Section $sectionName$ -->
+<section class="block $className$" id="$sectionId$">
     <div class="holder">
         <div class="container-fluid">
-            <div class="block-title"></div>
-            <div class="block-content">
+            <div class="header"></div>
+            <div class="content">
                 $SELECTION$
             </div>
         </div>
     </div>
-</section> <!-- /.$name$ -->
+</section>
+<!-- /.$name$ -->
 
 ``
