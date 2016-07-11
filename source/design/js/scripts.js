@@ -65,7 +65,7 @@ var general = {
         init: function() {
             this.elem = $('.mobile-navigation');
 
-            if(this.elem) {
+            if(this.elem.length) {
 
             }
         }
@@ -91,7 +91,7 @@ var general = {
         init: function() {
             this.elem = $('.navigation');
 
-            if(this.elem) {
+            if(this.elem.length) {
                 var _this = this;
                 this.navigationToggleBtn = this.elem.find('.navigation-toggle');
 
@@ -135,7 +135,7 @@ var general = {
         init: function() {
             this.elem = $('.outer-wrapper');
 
-            if(this.elem) {
+            if(this.elem.length) {
 
             }
         }
