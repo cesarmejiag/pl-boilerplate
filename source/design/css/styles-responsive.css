@@ -8,13 +8,13 @@
 @media (max-width: 767px) {
 
     /* Body */
-    body.mobile-navigation-open{
+    body.mobile-navigation-open {
         overflow: hidden;
     }
 
 
     /* Mobile navigation */
-    .mobile-navigation{
+    .mobile-navigation {
         height: 100%;
         overflow-y: scroll;
         position: fixed;
@@ -29,13 +29,13 @@
         transition: right 350ms;
     }
 
-    .mobile-navigation.mobile-navigation-open{
+    .mobile-navigation.mobile-navigation-open {
         right: 0;
     }
 
 
     /* Navigation */
-    .navigation{
+    .navigation {
         -webkit-transition: right 350ms;
         -moz-transition: right 350ms;
         -ms-transition: right 350ms;
@@ -43,13 +43,13 @@
         transition: right 350ms;
     }
 
-    .navigation.mobile-navigation-open{
+    .navigation.mobile-navigation-open {
         right: 250px;
     }
 
 
     /* Outer wrapper */
-    .outer-wrapper{
+    .outer-wrapper {
         right: 0;
 
         -webkit-transition: right 350ms;
@@ -59,7 +59,7 @@
         transition: right 350ms;
     }
 
-    .outer-wrapper.mobile-navigation-open{
+    .outer-wrapper.mobile-navigation-open {
         right: 250px;
     }
 

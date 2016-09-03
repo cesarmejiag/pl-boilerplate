@@ -23,7 +23,7 @@ body {
     font-smoothing: antialiased;
 }
 
-.holder{
+.holder {
     margin: 0 auto;
     max-width: 1010px;
     width: 100%;
@@ -31,7 +31,7 @@ body {
 
 
 /* Navigation */
-.navigation{
+.navigation {
     position: fixed;
     right: 0;
     top: 0;
@@ -39,14 +39,14 @@ body {
     z-index: 1;
 }
 
-.navigation .navigation-toggle{
+.navigation .navigation-toggle {
     border: none;
     float: right;
     padding: 10px;
     width: 50px;
 }
 
-.navigation .navigation-toggle .bar{
+.navigation .navigation-toggle .bar {
     background-color: #333;
     display: block;
     height: 3px;
@@ -54,12 +54,12 @@ body {
     width: 100%;
 }
 
-.navigation .navigation-toggle .bar:last-child{
+.navigation .navigation-toggle .bar:last-child {
     margin-bottom: 0;
 }
 
 
 /* Outer wrapper */
-.outer-wrapper{
+.outer-wrapper {
     position: relative;
 }

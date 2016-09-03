@@ -27,9 +27,9 @@ var general = {
         general.OuterWrapper.init();
 
         // Events
-        general.$window.on('load', function(){ general._onLoad(); });
-        general.$window.on('resize', function(){ general._onResize(); });
-        general.$window.on('scroll', function(){ general._onScroll(); });
+        general.$window.on('load', function() { general._onLoad(); });
+        general.$window.on('resize', function() { general._onResize(); });
+        general.$window.on('scroll', function() { general._onScroll(); });
     },
 
     /**
@@ -83,7 +83,7 @@ var general = {
         /**
          * @type jQuery
          */
-        navigationToggleBtn: null,
+        navToggleBtn: null,
 
         /**
          * Initialize page part.
@@ -93,29 +93,30 @@ var general = {
 
             if(this.elem.length) {
                 var _this = this;
-                this.navigationToggleBtn = this.elem.find('.navigation-toggle');
+                this.navToggleBtn = this.elem.find('.navigation-toggle');
 
-                this.navigationToggleBtn.on('click', function() { _this.openMobileNavigation(); });
+                this.navToggleBtn.on('click', function() { _this.openMobileNavigation(); });
             }
         },
 
         openMobileNavigation: function() {
-            if(this.navigationToggleBtn.hasClass('mobile-navigation-open')) {
-                general.MobileNavigation.elem.removeClass('mobile-navigation-open');
-                general.Navigation.elem.removeClass('mobile-navigation-open');
-                general.OuterWrapper.elem.removeClass('mobile-navigation-open');
-                general.$body.removeClass('mobile-navigation-open');
+            var elems = [
+                general.MobileNavigation.elem,
+                general.Navigation.elem,
+                general.OuterWrapper.elem,
+                general.$body,
 
-                this.navigationToggleBtn.removeClass('mobile-navigation-open');
+                this.navToggleBtn
+            ];
 
-            } else {
-                general.MobileNavigation.elem.addClass('mobile-navigation-open');
-                general.Navigation.elem.addClass('mobile-navigation-open');
-                general.OuterWrapper.elem.addClass('mobile-navigation-open');
-                general.$body.addClass('mobile-navigation-open');
+            for (var i = 0; i < elems.length; i++) {
+                var elem = elems[i];
 
-                this.navigationToggleBtn.addClass('mobile-navigation-open');
-
+                if (this.navToggleBtn.hasClass('mobile-navigation-open')) {
+                    elem.removeClass('mobile-navigation-open');
+                } else {
+                    elem.addClass('mobile-navigation-open');
+                }
             }
         }
     },
