@@ -5,7 +5,7 @@
     var gulp       = require('gulp'),
         concat     = require('gulp-concat'),
         rename     = require('gulp-rename'),
-        minifyCss  = require('gulp-minify-css'),
+        uglifycss  = require('gulp-uglifycss'),
         tinypng    = require('gulp-tinypng-compress'),
         uglify     = require('gulp-uglify'),
         htmlmin    = require('gulp-htmlmin'),
@@ -82,7 +82,7 @@
 
         return gulp.src(srcFiles)
             .pipe(concat(outputFile))
-            .pipe(minifyCss())
+            .pipe(uglifycss())
             .pipe(gulp.dest(destPath.css));
     });
 
@@ -119,8 +119,8 @@
      * Reference: https://github.com/stnvh/gulp-tinypng-compress
      */
     gulp.task('imgs', function() {
-        var tinyFiles  = srcPath.imgs + '*.{png,jpg,jpeg}',
-            otherFiles = srcPath.imgs + '*.*';
+        var tinyFiles  = srcPath.imgs + '**/*.{png,jpg,jpeg}',
+            otherFiles = srcPath.imgs + '**/*.*';
 
         // Copy non png, jpg and jpeg files.
         gulp.src([otherFiles, '!' + tinyFiles])
