@@ -1,3 +1,2 @@
-.idea
-/node-modules
-/bower-modules
+.idea/
+node_modules/
