@@ -81,12 +81,14 @@
         <nav class="mobile-navigation visible-xs">
             <div class="inner">
                 <!-- Logo -->
-                <a class="logo" href="/">Goplek</a>
+                <a class="logo" href="/">
+                    <img alt="Goplek - Web Studio" class="img-responsive" src="design/imgs/logo.svg">
+                </a>
 
                 <!-- Navigation List -->
                 <ul class="list">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
         </nav>
@@ -96,12 +98,14 @@
             <div class="holder">
                 <div class="container-fluid">
                     <!-- Logo -->
-                    <a class="logo" href="/">Goplek</a>
+                    <a class="logo" href="/">
+                        <img alt="Goplek - Web Studio" class="img-responsive" src="design/imgs/logo.svg">
+                    </a>
 
                     <!-- Navigation List -->
-                    <ul class="list">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Contact</a></li>
+                    <ul class="list hidden-xs">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Contacto</a></li>
                     </ul>
 
                     <!-- Navigation toggle -->
@@ -117,25 +121,81 @@
         <!-- Outer wrapper -->
         <div class="outer-wrapper">
 
-            <!-- Section -->
+            <!-- Block  -->
             <section class="block " id="">
                 <div class="holder">
                     <div class="container-fluid">
                         <div class="header">
-                            <!-- Section Header -->
+                            <!-- Block Header -->
                         </div>
                         <div class="content">
-                            <!-- Section Content -->
+                            <!-- Block Content -->
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Footer -->
-            <footer>
+            <!-- /. -->
+            
+            <!-- Block Contact -->
+            <section class="block contact" id="contacto">
                 <div class="holder">
                     <div class="container-fluid">
-                        <!-- Footer Content -->
+                        <div class="header">
+                            <h2 class="title">Contacto</h2>
+                        </div>
+                        <div class="content">
+
+                            <!-- Contact Info -->
+                            <div class="contact-info">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="phones">
+                                            <div><a href="tel:0000000000">(000) 000 0000</a></div>
+                                            <div><a href="tel:0000000000">(000) 000 0000</a></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="address">
+                                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Form -->
+                            <form class="contact-form">
+                                <input name="Nombre" placeholder="Nombre" type="text">
+                                <input name="Email" placeholder="Email" type="text">
+                                <textarea name="Mensaje" placeholder="Mensaje"></textarea>
+
+                                <input type="submit" value="Enviar">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Contact -->
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="holder">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="copyright">
+                                    <div>Todos los derechos reservados.</div>
+                                    <div>Goplek - Web Studio</div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-xs-6">
+                                <a class="goplek-logo" href="#">
+                                    <img alt="Goplek - Web Studio" class="img-responsive" src="design/imgs/logo.svg">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </footer>
@@ -143,6 +203,8 @@
 
         <!-- Include jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Contact Script (dev) -->
+        <script src="design/js/jquery.contact.js"></script>
         <!-- Page Scripts (dev) -->
         <script src="design/js/scripts.js"></script>
         <!-- Page Scripts (production) -->

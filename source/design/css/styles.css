@@ -23,6 +23,7 @@ body {
     font-smoothing: antialiased;
 }
 
+
 .holder {
     margin: 0 auto;
     max-width: 1010px;
@@ -30,8 +31,30 @@ body {
 }
 
 
+.align-top,
+.align-middle,
+.align-bottom {
+    display: inline-block;
+    float: none;
+    margin-left: -2px;
+    margin-right: -2px;
+}
+
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+
+.table-layout { display: table; width: 100%; }
+.table-cell-layout { display: table-cell; }
+
+
 /* Navigation */
 .navigation {
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .30);
+    height: 70px;
+    padding: 10px 0;
     position: fixed;
     right: 0;
     top: 0;
@@ -39,9 +62,36 @@ body {
     z-index: 1;
 }
 
+/* Navigation - Logo */
+.navigation .logo {
+    display: block;
+    float: left;
+    width: 85px;
+}
+
+/* Navigation - List */
+.navigation .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.navigation .list li {
+    display: inline;
+    margin-left: 25px;
+}
+
+.navigation .list a {
+    color: #666;
+    line-height: 46px;
+}
+
 .navigation .navigation-toggle {
+    background-color: transparent;
     border: none;
     float: right;
+    outline: none;
     padding: 10px;
     width: 50px;
 }
@@ -50,7 +100,7 @@ body {
     background-color: #333;
     display: block;
     height: 3px;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
     width: 100%;
 }
 
@@ -61,5 +111,81 @@ body {
 
 /* Outer wrapper */
 .outer-wrapper {
+    margin-top: 75px;
     position: relative;
+}
+
+
+/* Block */
+.block {
+    padding: 65px 0;
+}
+
+.block .header {
+    margin-bottom: 35px;
+}
+
+.block .header .title {
+    margin-top: 0;
+    text-align: center;
+}
+
+
+/* Block Contact */
+.block.contact {  }
+
+/* Override Holder */
+.block.contact > .holder {
+    max-width: 680px;
+}
+
+/* Block Contact - Contact Info */
+.block.contact .contact-info {
+    margin-bottom: 35px;
+}
+
+.block.contact .contact-info .phones {  }
+
+.block.contact .contact-info .address {  }
+
+/* Block Contact - Contact Form */
+.block.contact .contact-form {  }
+
+.block.contact .contact-form input[type=text],
+.block.contact .contact-form textarea {
+    border: 1px solid #dcdcdc;
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+.block.contact .contact-form input[type=submit] {
+    background-color: #dcdcdc;
+    border: none;
+    color: #969696;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    max-width: 180px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* Footer */
+.footer {
+    background-color: #f1f1f1;
+    color: #9a9a9a;
+    font-size: 11px;
+    padding: 15px 0;
+}
+
+.footer .copyright {  }
+
+.footer .goplek-logo {
+    display: block;
+    margin-left: auto;
+    width: 50px;
 }
