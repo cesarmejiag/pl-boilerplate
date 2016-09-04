@@ -149,7 +149,9 @@ body {
 .block.contact .contact-info .address {  }
 
 /* Block Contact - Contact Form */
-.block.contact .contact-form {  }
+.block.contact .contact-form {
+    min-height: 150px;
+}
 
 .block.contact .contact-form input[type=text],
 .block.contact .contact-form textarea {

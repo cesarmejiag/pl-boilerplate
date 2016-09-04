@@ -54,6 +54,23 @@ var general = {
     _onScroll: function() {  },
 
     /**
+     * Scroll to a section indicated by hash.
+     * @param {string} hash
+     * @param {number} scrollTime
+     * @param {number} extraOffset
+     */
+    scrollTo: function(hash, scrollTime, extraOffset) {
+        var section = $(hash);
+
+        if(section.length){
+            var st = scrollTime || 1000, eo = extraOffset || 0;
+            var offset = section.offset().top - extraOffset;
+
+            $('html, body').stop().animate({scrollTop: offset}, scrollTime);
+        }
+    },
+
+    /**
      * MobileNavigation.
      */
     MobileNavigation: {
