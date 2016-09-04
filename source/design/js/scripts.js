@@ -26,6 +26,9 @@ var general = {
         general.Navigation.init();
         general.OuterWrapper.init();
 
+        //
+        ContactForm.addForm( $('.contact-form') );
+
         // Events
         general.$window.on('load', function() { general._onLoad(); });
         general.$window.on('resize', function() { general._onResize(); });

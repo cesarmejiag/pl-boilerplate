@@ -160,10 +160,15 @@ body {
     width: 100%;
 }
 
+.block.contact .contact-form textarea {
+    height: 125px;
+    resize: none;
+}
+
 .block.contact .contact-form input[type=submit] {
     background-color: #dcdcdc;
     border: none;
-    color: #969696;
+    color: #666;
     cursor: pointer;
     display: block;
     margin-left: auto;
