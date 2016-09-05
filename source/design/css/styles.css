@@ -87,7 +87,7 @@ body {
     line-height: 46px;
 }
 
-.navigation .navigation-toggle {
+.navigation .toggle-btn {
     background-color: transparent;
     border: none;
     float: right;
@@ -96,7 +96,7 @@ body {
     width: 50px;
 }
 
-.navigation .navigation-toggle .bar {
+.navigation .toggle-btn .bar {
     background-color: #333;
     display: block;
     height: 3px;
@@ -104,9 +104,7 @@ body {
     width: 100%;
 }
 
-.navigation .navigation-toggle .bar:last-child {
-    margin-bottom: 0;
-}
+.navigation .toggle-btn .bar:last-child { margin-bottom: 0; }
 
 
 /* Outer wrapper */

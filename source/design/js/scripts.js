@@ -26,8 +26,6 @@ var general = {
         general.Navigation.init();
         general.OuterWrapper.init();
 
-        //
-        ContactForm.addForm( $('.contact-form') );
 
         // Events
         general.$window.on('load', function() { general._onLoad(); });
@@ -103,7 +101,7 @@ var general = {
         /**
          * @type jQuery
          */
-        navToggleBtn: null,
+        toggleBtn: null,
 
         /**
          * Initialize page part.
@@ -113,9 +111,9 @@ var general = {
 
             if(this.elem.length) {
                 var _this = this;
-                this.navToggleBtn = this.elem.find('.navigation-toggle');
+                this.toggleBtn = this.elem.find('.toggle-btn');
 
-                this.navToggleBtn.on('click', function() { _this.openMobileNavigation(); });
+                this.toggleBtn.on('click', function() { _this.openMobileNavigation(); });
             }
         },
 
@@ -126,13 +124,13 @@ var general = {
                 general.OuterWrapper.elem,
                 general.$body,
 
-                this.navToggleBtn
+                this.toggleBtn
             ];
 
             for (var i = 0; i < elems.length; i++) {
                 var elem = elems[i];
 
-                if (this.navToggleBtn.hasClass('mobile-navigation-open')) {
+                if (this.toggleBtn.hasClass('mobile-navigation-open')) {
                     elem.removeClass('mobile-navigation-open');
                 } else {
                     elem.addClass('mobile-navigation-open');
