@@ -62,9 +62,9 @@ var general = {
 
         if(section.length){
             var st = scrollTime || 1000, eo = extraOffset || 0;
-            var offset = section.offset().top - extraOffset;
+            var offset = section.offset().top - eo;
 
-            $('html, body').stop().animate({scrollTop: offset}, scrollTime);
+            $('html, body').stop().animate({scrollTop: offset}, st);
         }
     },
 
