@@ -97,7 +97,7 @@
         ];
 
         return gulp.src(srcFiles)
-            .pipe(minifyCss())
+            .pipe(uglifycss())
             .pipe(gulp.dest(destPath.css + 'vendor'));
     });
 
