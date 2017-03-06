@@ -27,6 +27,10 @@ var general = {
         general.OuterWrapper.init();
 
 
+        var $form = $('.contact-form');
+        var contactForm = new ContactForm($form);
+
+
         // Events
         general.$window.on('load', function() { general._onLoad(); });
         general.$window.on('resize', function() { general._onResize(); });
