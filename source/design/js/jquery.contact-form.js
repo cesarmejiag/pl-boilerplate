@@ -32,6 +32,9 @@ var ContactForm = (function() {
     function ContactForm ($form) {
         if ($form instanceof jQuery) {
 
+            // Store custom handlers for each event in ajax request.
+            this.handlers = {  };
+
             // Points to form.
             this.$form = $form;
 
@@ -52,6 +55,15 @@ var ContactForm = (function() {
 
 
     ContactForm.prototype = {
+
+        /**
+         * Add custom handler.
+         * @param {string} name beforeSend|error|success
+         * @param {function} handler
+         */
+        addHandler: function(name, handler) {
+            this.handlers[name] = handler;
+        },
 
         /**
          * Make an ajax request to send contact form.
@@ -197,7 +209,8 @@ var ContactForm = (function() {
 
                 // Set default handlers.
                 var handlers  = {},
-                    uHandlers = ContactForm.handlers,
+                    mHandlers = this.handlers,
+                    sHandlers = ContactForm.handlers,
                     $response = $('<div class="server-response">');
 
 
@@ -209,19 +222,19 @@ var ContactForm = (function() {
                 };
 
                 // Define default handler for beforeSend.
-                handlers.beforeSend = uHandlers.beforeSend || function(jqXHR, settings) {
+                handlers.beforeSend = mHandlers.beforeSend || sHandlers.beforeSend || function(jqXHR, settings) {
                         $response.text('Enviando...');
                         showResponse($response);
                     };
 
                 // Define default handler for error.
-                handlers.error = uHandlers.error || function(jqXHR, textStatus, errorThrown) {
+                handlers.error = mHandlers.error || sHandlers.error || function(jqXHR, textStatus, errorThrown) {
                         $response.text('Error: No se pudo entregar el mensaje.');
                         showResponse($response);
                     };
 
                 // Define default handler for success.
-                handlers.success = uHandlers.success || function(data, textStatus, jqXHR) {
+                handlers.success = mHandlers.success || sHandlers.success || function(data, textStatus, jqXHR) {
                         if (parseInt(data))
                             $response.text('El mensaje fue entregado correctamente.');
                         else

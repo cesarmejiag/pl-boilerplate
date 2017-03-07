@@ -29,7 +29,7 @@ var general = {
 
         var $form = $('.contact-form');
         var contactForm = new ContactForm($form);
-
+        
 
         // Events
         general.$window.on('load', function() { general._onLoad(); });

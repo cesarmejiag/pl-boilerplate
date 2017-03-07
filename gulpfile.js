@@ -73,6 +73,7 @@
     gulp.task('css', function() {
         // Source files.
         var srcFiles = [
+            srcPath.css + 'fonts.css',
             srcPath.css + 'styles.css',
             srcPath.css + 'styles-responsive.css'
         ];
