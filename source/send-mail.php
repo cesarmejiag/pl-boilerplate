@@ -1,5 +1,5 @@
 <?php
 
-	sleep(3);
+	sleep(20);
 
 	echo 0;

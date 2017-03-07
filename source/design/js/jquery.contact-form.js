@@ -4,7 +4,7 @@
  *       Add lang feature
  */
 
-var ContactForm = (function() {
+var ContactForm = (function(w) {
     'use strict';
 
     /**
@@ -50,6 +50,9 @@ var ContactForm = (function() {
             // Attach submit handler.
             this.$form.on('submit', this.onSubmit.bind(this));
 
+            // Attach onbeforeunload handler.
+            w.onbeforeunload = this.beforeUnload.bind(this);
+
         }
     }
 
@@ -85,6 +88,16 @@ var ContactForm = (function() {
 
             });
 
+        },
+
+        /**
+         * Shows message while contact form is working 
+         * and avoid user closes the window.
+         */
+        beforeUnload: function() {
+            if (!this.letCloseWindow) {
+                return 'Sending message';
+            }
         },
 
         /**
@@ -260,4 +273,4 @@ var ContactForm = (function() {
 
     return ContactForm;
 
-})();
+})(window);

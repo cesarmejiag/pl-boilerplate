@@ -20,6 +20,15 @@ body {
     font-smoothing: antialiased;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
+body.blurry {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+}
+
 
 .holder {
     margin: 0 auto;
@@ -190,4 +199,17 @@ body {
     display: block;
     margin-left: auto;
     width: 50px;
+}
+
+
+/* Contact Form Loader */
+.contact-form-loader {
+    background-color: #cacaca;
+    background-color: rgba(205, 205, 205, 0.5);
+    left: 0;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
 }
