@@ -45,7 +45,7 @@ var ContactForm = (function(w) {
             this.letCloseWindow = true;
 
             // Loader screen element.
-            this.$loader = $('<div class="contact-form-loader">');
+            this.$loader = $('<div class="page-loader">');
 
             // Attach change handler.
             this.getInputs().on('change', this.onInputChange.bind(this));
@@ -82,8 +82,7 @@ var ContactForm = (function(w) {
                 data: data,
                 type: 'GET',
                 // type: 'POST',
-                // url: 'http://goplek.com/mailer/send-mail.php',
-                url: 'send-mail.php',
+                url: 'http://goplek.com/mailer/send-mail.php',
 
                 beforeSend: handlers.beforeSend,
                 error     : handlers.error,
@@ -116,6 +115,8 @@ var ContactForm = (function(w) {
          */
         hideLoader: function() {
             this.letCloseWindow = true;
+
+            this.$body.children().not('script').removeClass('blurry');
 
             this.$loader.removeClass('displayed');
             this.$loader.remove();
@@ -152,8 +153,10 @@ var ContactForm = (function(w) {
         /**
          * Show loader element.
          */
-        showLoader: function() {
+        showLoader: function() {        
             this.letCloseWindow = false;
+
+            this.$body.children().not('script').addClass('blurry');
 
             this.$loader.appendTo(this.$body);
             this.$loader.css('opacity');

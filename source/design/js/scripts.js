@@ -25,10 +25,6 @@ var general = {
         general.MobileNavigation.init();
         general.Navigation.init();
         general.OuterWrapper.init();
-
-
-        var $form = $('.contact-form');
-        var contactForm = new ContactForm($form);
         
 
         // Events
