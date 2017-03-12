@@ -32,6 +32,9 @@ var ContactForm = (function(w) {
     function ContactForm ($form) {
         if ($form instanceof jQuery) {
 
+            // Points to body element.
+            this.$body = $('body');
+
             // Store custom handlers for each event in ajax request.
             this.handlers = {  };
 
@@ -109,6 +112,16 @@ var ContactForm = (function(w) {
         },
 
         /**
+         * Hide loader element.
+         */
+        hideLoader: function() {
+            this.letCloseWindow = true;
+
+            this.$loader.removeClass('displayed');
+            this.$loader.remove();
+        },
+
+        /**
          * Get validity of a form input.
          * @param {jQuery} $input
          * @returns {boolean} validity
@@ -134,6 +147,17 @@ var ContactForm = (function(w) {
                         console.log("Unknown validation type: " + type);
                     return true;
             }
+        },
+
+        /**
+         * Show loader element.
+         */
+        showLoader: function() {
+            this.letCloseWindow = false;
+
+            this.$loader.appendTo(this.$body);
+            this.$loader.css('opacity');
+            this.$loader.addClass('displayed');
         },
 
         /**
@@ -236,25 +260,31 @@ var ContactForm = (function(w) {
 
                 // Define default handler for beforeSend.
                 handlers.beforeSend = mHandlers.beforeSend || sHandlers.beforeSend || function(jqXHR, settings) {
-                        $response.text('Enviando...');
-                        showResponse($response);
-                    };
+                    self.showLoader();
+
+                    $response.text('Enviando...');
+                    showResponse($response); 
+                };
 
                 // Define default handler for error.
                 handlers.error = mHandlers.error || sHandlers.error || function(jqXHR, textStatus, errorThrown) {
-                        $response.text('Error: No se pudo entregar el mensaje.');
-                        showResponse($response);
-                    };
+                    self.hideLoader();
+
+                    $response.text('Error: No se pudo entregar el mensaje.');
+                    showResponse($response);
+                };
 
                 // Define default handler for success.
                 handlers.success = mHandlers.success || sHandlers.success || function(data, textStatus, jqXHR) {
-                        if (parseInt(data))
-                            $response.text('El mensaje fue entregado correctamente.');
-                        else
-                            $response.text('No se pudo entregar el mensaje. Intentalo mas tarde.');
+                    self.hideLoader();
 
-                        showResponse($response);
-                    };
+                    if (parseInt(data))
+                        $response.text('El mensaje fue entregado correctamente.');
+                    else
+                        $response.text('No se pudo entregar el mensaje. Intentalo mas tarde.');
+
+                    showResponse($response);
+                };
 
                 // Send data to server.
                 this.ajaxRequest(data, handlers);
