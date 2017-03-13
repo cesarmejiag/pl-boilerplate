@@ -1,28 +1,32 @@
-
 (function() {
     'use strict';
 
-    var gulp       = require('gulp'),
-        concat     = require('gulp-concat'),
-        rename     = require('gulp-rename'),
-        uglifycss  = require('gulp-uglifycss'),
-        tinypng    = require('gulp-tinypng-compress'),
-        uglify     = require('gulp-uglify'),
-        htmlmin    = require('gulp-htmlmin'),
-        favicons   = require("gulp-favicons/es5"),
-        sequence   = require('gulp-sequence'),
-        livereload = require('gulp-livereload');
+    // ---------------------------------------------------------------------
+    // | Define dependencies to use.                                       |
+    // ---------------------------------------------------------------------
+    const gulp       = require('gulp');
+    const concat     = require('gulp-concat');
+    const rename     = require('gulp-rename');
+    const uglifycss  = require('gulp-uglifycss');
+    const tinypng    = require('gulp-tinypng-compress');
+    const uglify     = require('gulp-uglify');
+    const htmlmin    = require('gulp-htmlmin');
+    const favicons   = require("gulp-favicons/es5");
+    const sequence   = require('gulp-sequence');
+    const styl       = require('gulp-styl');
+    const livereload = require('gulp-livereload');
 
 
-    var srcPath = {
+    const srcPath = {
         css  : 'source/design/css/',
         fonts: 'source/design/fonts/',
         imgs : 'source/design/imgs/',
         js   : 'source/design/js/',
+        styl : 'source/design/styl/',
         root : 'source/'
     };
 
-    var destPath = {
+    const destPath = {
         css  : 'html/design/css/',
         fonts: 'html/design/fonts/',
         imgs : 'html/design/imgs/',
@@ -38,7 +42,7 @@
     /**
      * Reload on change.
      */
-    gulp.task('reload', function() {
+    gulp.task('reload', () => {
         gulp.src(srcPath.root)
             .pipe(livereload());
     });
@@ -48,12 +52,12 @@
      * Use with livereload chrome extension.
      * Reference: https://github.com/vohof/gulp-livereload
      */
-    gulp.task('watch', function() {
+    gulp.task('watch', () => {
         // Files to be watched.
-        var files = [
-            srcPath.root + '*.html',
-            srcPath.css  + '**/*.css',
-            srcPath.js   + '**/*.js'
+        let files = [
+            `${srcPath.root}*.html`,
+            `${srcPath.css}**/*.css`,
+            `${srcPath.js}**/*.js`
         ];
 
         livereload.listen();
@@ -70,16 +74,16 @@
      * Concatenate and minify css files using gulp-minify-css.
      * Reference: https://github.com/murphydanger/gulp-minify-css
      */
-    gulp.task('css', function() {
+    gulp.task('css', () => {
         // Source files.
-        var srcFiles = [
-            srcPath.css + 'fonts.css',
-            srcPath.css + 'styles.css',
-            srcPath.css + 'styles-responsive.css'
+        let srcFiles = [
+            `${srcPath.css}fonts.css`,
+            `${srcPath.css}styles.css`,
+            `${srcPath.css}styles-responsive.css`
         ];
 
         // Output file.
-        var outputFile = 'styles.min.css';
+        let outputFile = 'styles.min.css';
 
         return gulp.src(srcFiles)
             .pipe(concat(outputFile))
@@ -91,143 +95,29 @@
     /**
      * Minify and copy css vendor files.
      */
-    gulp.task('css-vendor', function() {
+    gulp.task('css-vendor', () => {
         // Source vendor files
-        var srcFiles = [
-            srcPath.css + 'vendor/**/*.css'
-        ];
+        let srcFiles = [ `${srcPath.css}vendor/**/*.css` ];
 
         return gulp.src(srcFiles)
             .pipe(uglifycss())
-            .pipe(gulp.dest(destPath.css + 'vendor'));
+            .pipe(gulp.dest(`${destPath.css}vendor`));
     });
 
 
     /**
-     * Copy specific files from fonts folder.
-     */
-    gulp.task('fonts', function() {
-        // Source files.
-        var srcFiles = srcPath.fonts + '*.{eot,woff,woff2,ttf,svg,otf}';
-
-        return gulp.src(srcFiles)
-            .pipe(gulp.dest(destPath.fonts));
-    });
-
-
-    /**
-     * Optimize images using gulp-tinypng-compress.
-     * Reference: https://github.com/stnvh/gulp-tinypng-compress
-     */
-    gulp.task('imgs', function() {
-        var tinyFiles  = srcPath.imgs + '**/*.{png,jpg,jpeg}',
-            otherFiles = srcPath.imgs + '**/*.*';
-
-        // Copy non png, jpg and jpeg files.
-        gulp.src([otherFiles, '!' + tinyFiles])
-            .pipe(gulp.dest(destPath.imgs));
-
-
-        // tinypng options
-        var opts = {
-            key: 'pFFAVLRIqtR-exFUo5XuSLrNAuP53k4d',
-            sigFile: srcPath.imgs + '.tinypng-sigs',
-            log: true
-        };
-
-        // Optimize tinyFiles.
-        return gulp.src(tinyFiles)
-            .pipe(tinypng(opts))
-            .pipe(gulp.dest(destPath.imgs));
-    });
-
-
-    /**
-     * Concatenate and minify js files.
-     * References: https://github.com/terinjokes/gulp-uglify
-     *             http://lisperator.net/uglifyjs/
-     */
-    gulp.task('js', function() {
-        // Source files (avoid vendor)
-        var srcFiles = [
-            '!' + srcPath.js + 'vendor/**/',
-            srcPath.js + '**/*.js'
-        ];
-
-        // Output file.
-        var outputFile = 'scripts.min.js';
-
-        return gulp.src(srcFiles)
-            .pipe(concat(outputFile))
-            .pipe(uglify())
-            .pipe(gulp.dest(destPath.js));
-    });
-
-
-    /**
-     * Copy and minify js vendor files.
-     */
-    gulp.task('js-vendor', function() {
-        // Source vendor files
-        var srcFiles = [
-            srcPath.js + 'vendor/**/*.js'
-        ];
-
-        return gulp.src(srcFiles)
-            .pipe(uglify())
-            .pipe(gulp.dest(destPath.js + 'vendor'));
-    });
-
-
-    /**
-     * Minify and create txt file from html.
-     * References: https://github.com/jonschlinkert/gulp-htmlmin
-     *             https://github.com/kangax/html-minifier
-     */
-    gulp.task('html', function() {
-        // Source files.
-        var srcFiles = srcPath.root + '[!_]*.html';
-
-        // Opts
-        var opts = {
-            collapseWhitespace: true,
-            removeComments: true
-        };
-
-        return gulp.src(srcFiles)
-            // .pipe(htmlmin(opts))
-            .pipe(rename({ extname: '.txt' }))
-            .pipe(gulp.dest(destPath.root));
-    });
-
-
-    /**
-     * Clone html files adding an underscore in name file.
-     */
-    gulp.task('html-dev', function() {
-        // Source files.
-        var srcFiles = srcPath.root + '[!_]*.html';
-
-        return gulp.src(srcFiles)
-            .pipe(rename({ prefix: '_' }))
-            .pipe(gulp.dest(srcPath.root));
-
-    });
-
-
-    /**
-     * Generate generate favicos.
+     * Generate generate favicons.
      * Reference: https://github.com/haydenbleasel/favicons
      */
-    gulp.task('favico', function() {
-        var opts = {
+    gulp.task('favicon', () => {
+        let opts = {
             appName: "My App",
             appDescription: "This is my application",
             developerName: "Goplek",
             developerURL: "http://goplek.com/",
             background: "transparent",
             path: "html/favicons",
-            url: "http://pageurl.com/",
+            url: "http://goplek-boilerplate.com/",
             display: "standalone",
             orientation: "portrait",
             version: 1.0,
@@ -247,9 +137,132 @@
             }
         };
 
-        return gulp.src(srcPath.root + 'favico.png')
+        return gulp.src(`${srcPath.root}favicon.png`)
             .pipe(favicons(opts))
-            .pipe(gulp.dest(destPath.root + 'favicons'));
+            .pipe(gulp.dest(`${destPath.root}favicons`));
+    });
+
+
+    /**
+     * Copy specific files from fonts folder.
+     */
+    gulp.task('fonts', () => {
+        // Source files.
+        let srcFiles = `${srcPath.fonts}*.{eot,woff,woff2,ttf,svg,otf}`;
+
+        return gulp.src(srcFiles)
+            .pipe(gulp.dest(destPath.fonts));
+    });
+
+
+    /**
+     * Minify and create txt file from html.
+     * References: https://github.com/jonschlinkert/gulp-htmlmin
+     *             https://github.com/kangax/html-minifier
+     */
+    gulp.task('html', () => {
+        // Source files.
+        let srcFiles = `${srcPath.root}[!_]*.html`;
+
+        // Opts
+        let opts = {
+            collapseWhitespace: true,
+            removeComments: true
+        };
+
+        return gulp.src(srcFiles)
+            // .pipe(htmlmin(opts))
+            .pipe(rename({ extname: '.txt' }))
+            .pipe(gulp.dest(destPath.root));
+    });
+
+
+    /**
+     * Clone html files adding an underscore in name file.
+     */
+    gulp.task('html-dev', () => {
+        // Source files.
+        let srcFiles = `${srcPath.root}[!_]*.html`;
+
+        return gulp.src(srcFiles)
+            .pipe(rename({ prefix: '_' }))
+            .pipe(gulp.dest(srcPath.root));
+    });
+
+
+    /**
+     * Optimize images using gulp-tinypng-compress.
+     * Reference: https://github.com/stnvh/gulp-tinypng-compress
+     */
+    gulp.task('imgs', () => {
+        let tinyFiles  = `${srcPath.imgs}**/*.{png,jpg,jpeg}`,
+            otherFiles = `${srcPath.imgs}**/*.*`;
+
+        // Copy non png, jpg and jpeg files.
+        gulp.src([otherFiles, `!${tinyFiles}`])
+            .pipe(gulp.dest(destPath.imgs));
+
+
+        // tinypng options
+        let opts = {
+            key: 'pFFAVLRIqtR-exFUo5XuSLrNAuP53k4d',
+            sigFile: `${srcPath.imgs}.tinypng-sigs`,
+            log: true
+        };
+
+        // Optimize tinyFiles.
+        return gulp.src(tinyFiles)
+            .pipe(tinypng(opts))
+            .pipe(gulp.dest(destPath.imgs));
+    });
+
+
+    /**
+     * Concatenate and minify js files.
+     * References: https://github.com/terinjokes/gulp-uglify
+     *             http://lisperator.net/uglifyjs/
+     */
+    gulp.task('js', () => {
+        // Source files (avoid vendor)
+        let srcFiles = [
+            `!${srcPath.js}vendor/**/`,
+            `${srcPath.js}**/*.js`
+        ];
+
+        // Output file.
+        let outputFile = 'scripts.min.js';
+
+        return gulp.src(srcFiles)
+            .pipe(concat(outputFile))
+            .pipe(uglify())
+            .pipe(gulp.dest(destPath.js));
+    });
+
+
+    /**
+     * Copy and minify js vendor files.
+     */
+    gulp.task('js-vendor', () => {
+        // Source vendor files
+        let srcFiles = [ `${srcPath.js}vendor/**/*.js` ];
+
+        return gulp.src(srcFiles)
+            .pipe(uglify())
+            .pipe(gulp.dest(`${destPath.js}vendor`));
+    });
+
+
+    /**
+     * Transpile styl files.
+     * Reference: https://github.com/sindresorhus/gulp-styl
+     */
+    gulp.task('styl', () => {
+        // Source files.
+        let srcFiles = `${srcPath.styl}**/*.styl`;
+
+        return gulp.src(srcFiles)
+            .pipe(styl())
+            .pipe(gulp.dest(srcPath.css));
     });
 
 
@@ -257,8 +270,8 @@
      * Build project and lave ready to deploy.
      * @param done
      */
-    gulp.task('build', function(done) {
-        sequence('css', 'css-vendor', 'fonts', 'imgs', 'js', 'js-vendor', 'html', 'favico', done);
+    gulp.task('build', (done) => {
+        sequence('css', 'css-vendor', 'fonts', 'imgs', 'js', 'js-vendor', 'html', 'favicon', done);
     });
 
 

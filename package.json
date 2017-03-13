@@ -12,6 +12,7 @@
     "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
     "gulp-sequence": "^0.4.6",
+    "gulp-styl": "^1.2.0",
     "gulp-tinypng-compress": "^1.2.1",
     "gulp-uglify": "^2.1.0",
     "gulp-uglifycss": "^1.0.6"
