@@ -13,7 +13,7 @@
     const htmlmin    = require('gulp-htmlmin');
     const favicons   = require("gulp-favicons/es5");
     const sequence   = require('gulp-sequence');
-    const styl       = require('gulp-styl');
+    const stylus     = require('gulp-stylus');
     const livereload = require('gulp-livereload');
 
 
@@ -253,15 +253,15 @@
 
 
     /**
-     * Transpile styl files.
-     * Reference: https://github.com/sindresorhus/gulp-styl
+     * Transpile stylus files.
+     * Reference: https://github.com/stevelacy/gulp-stylus
      */
-    gulp.task('styl', () => {
+    gulp.task('stylus', () => {
         // Source files.
         let srcFiles = `${srcPath.styl}**/*.styl`;
 
         return gulp.src(srcFiles)
-            .pipe(styl())
+            .pipe(stylus())
             .pipe(gulp.dest(srcPath.css));
     });
 
