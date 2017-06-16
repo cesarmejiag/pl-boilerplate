@@ -5,11 +5,13 @@
     // | Define dependencies to use.                                       |
     // ---------------------------------------------------------------------
     const gulp       = require('gulp');
+    const plumber    = require('gulp-plumber');
     const concat     = require('gulp-concat');
     const rename     = require('gulp-rename');
     const uglifycss  = require('gulp-uglifycss');
     const tinypng    = require('gulp-tinypng-compress');
     const uglify     = require('gulp-uglify');
+    const babel      = require('gulp-babel');
     const htmlmin    = require('gulp-htmlmin');
     const favicons   = require("gulp-favicons/es5");
     const sequence   = require('gulp-sequence');
@@ -220,7 +222,7 @@
     /**
      * Concatenate and minify js files.
      * References: https://github.com/terinjokes/gulp-uglify
-     *             http://lisperator.net/uglifyjs/
+     *             https://github.com/babel/gulp-babel
      */
     gulp.task('js', () => {
         // Source files (avoid vendor)
@@ -232,7 +234,12 @@
         // Output file.
         let outputFile = 'scripts.min.js';
 
+        // Babel settings.
+        let babelSettings = { presets: ['es2015'] };
+
         return gulp.src(srcFiles)
+            .pipe(plumber())
+            .pipe(babel(babelSettings))
             .pipe(concat(outputFile))
             .pipe(uglify())
             .pipe(gulp.dest(destPath.js));
@@ -261,6 +268,7 @@
         let srcFiles = `${srcPath.styl}**/*.styl`;
 
         return gulp.src(srcFiles)
+            .pipe(plumber())
             .pipe(stylus())
             .pipe(gulp.dest(srcPath.css));
     });

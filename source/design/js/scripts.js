@@ -26,6 +26,8 @@ var general = {
         general.Navigation.init();
         general.OuterWrapper.init();
         
+        // Initialize contact form.
+        new ContactForm( $('.contact-form') );
 
         // Events
         general.$window.on('load', function() { general._onLoad(); });
@@ -117,6 +119,9 @@ var general = {
             }
         },
 
+        /**
+         * 
+         */
         openMobileNavigation: function() {
             var elems = [
                 general.MobileNavigation.elem,
