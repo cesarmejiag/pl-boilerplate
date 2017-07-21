@@ -17,7 +17,7 @@
     "gulp-sequence": "^0.4.6",
     "gulp-stylus": "^2.6.0",
     "gulp-tinypng-compress": "^1.2.1",
-    "gulp-uglify": "^2.1.2",
+    "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.8"
   },
   "scripts": {

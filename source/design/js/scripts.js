@@ -54,6 +54,39 @@ var general = {
     _onScroll: function() {  },
 
     /**
+     * Send notification to Google Analytics.
+     * @param {string} category
+     * @param {string} action
+     * @param {string} label
+     * @return {[type]} [description]
+     */
+    ga: function(category, action, label) {
+        if ("function" === typeof ga 
+            && "string" === typeof category
+            && "string" === typeof action) {
+            var object = {
+                hitType      : 'event',
+                eventCategory: category,
+                eventAction  : action,
+                eventLabel   : label || ''
+            };
+
+            // Send to Google Analytics.
+            ga('send', object);
+
+            // Print in console.
+            if ("console" in window) {
+                console.log(
+                    'ga: [category: %s, action: %s, label: %s]',
+                    object.eventCategory,
+                    object.eventAction,
+                    object.eventLabel
+                );
+            }
+        }
+    },
+
+    /**
      * Scroll to a section indicated by hash.
      * @param {string} hash
      * @param {number} scrollTime
