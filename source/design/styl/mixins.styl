@@ -1,0 +1,60 @@
+/*
+    Document   : mixins.styl
+    Created on : 21/09/2017, 07:050:15 PM
+    Author     : cesarmejia
+    Description:
+*/
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -ms-{prop} args
+  -o-{prop} args
+  {prop} args
+
+
+border-radius()
+  vendor('border-radius', arguments)
+
+
+box-shadow()
+  vendor('box-shadow', arguments)
+
+
+filter()
+  vendor('filter', arguments)
+
+
+font-smoothing()
+  vendor('font-smoothing', arguments)
+
+
+text-rendering()
+  vendor('text-rendering', arguments)
+
+
+transition()
+  vendor('transition', arguments)
+
+
+transform()
+  vendor('transform', arguments)
+
+
+transform-origin()
+  vendor('transform-origin', arguments)
+
+
+user-select()
+  vendor('user-select', arguments)
+
+
+background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval, deprecatedWebkitStartPoint = false, deprecatedWebkitEndPoint = false)
+  background-color startColor
+  if deprecatedWebkitStartPoint && deprecatedWebkitEndPoint
+    background-image -webkit-gradient(linear, deprecatedWebkitStartPoint, deprecatedWebkitEndPoint, color-stop(startInterval, startColor), color-stop(endInterval, endColor))
+  background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)
