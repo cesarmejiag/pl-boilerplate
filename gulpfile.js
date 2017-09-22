@@ -1,19 +1,20 @@
 // ---------------------------------------------------------------------
 // | Define dependencies to use.                                       |
 // ---------------------------------------------------------------------
-const gulp       = require('gulp');
-const plumber    = require('gulp-plumber');
-const concat     = require('gulp-concat');
-const rename     = require('gulp-rename');
-const uglifycss  = require('gulp-uglifycss');
-const tinypng    = require('gulp-tinypng-compress');
-const uglify     = require('gulp-uglify');
-const babel      = require('gulp-babel');
-const htmlmin    = require('gulp-htmlmin');
-const favicons   = require("gulp-favicons/es5");
-const sequence   = require('gulp-sequence');
-const stylus     = require('gulp-stylus');
-const livereload = require('gulp-livereload');
+const gulp         = require('gulp');
+const plumber      = require('gulp-plumber');
+const concat       = require('gulp-concat');
+const rename       = require('gulp-rename');
+const uglifycss    = require('gulp-uglifycss');
+const tinypng      = require('gulp-tinypng-compress');
+const uglify       = require('gulp-uglify');
+const babel        = require('gulp-babel');
+const htmlmin      = require('gulp-htmlmin');
+const favicons     = require("gulp-favicons/es5");
+const sequence     = require('gulp-sequence');
+const stylus       = require('gulp-stylus');
+const autoprefixer = require('gulp-autoprefixer');
+const livereload   = require('gulp-livereload');
 
 
 const srcPath = {
@@ -266,6 +267,11 @@ gulp.task('stylus', () => {
     // Source files.
     let srcFiles = `${srcPath.styl}**/*.styl`;
 
+    let autoPrefixerOpts = {
+        browsers: 'last 2 versions',
+        cascade: true
+    };
+
     // Output file.
     let outputFile = 'styles.css';
 
@@ -273,6 +279,7 @@ gulp.task('stylus', () => {
         .pipe(plumber())
         .pipe(stylus())
         .pipe(concat(outputFile))
+        .pipe(autoprefixer(autoPrefixerOpts))
         .pipe(gulp.dest(srcPath.css));
 });
 

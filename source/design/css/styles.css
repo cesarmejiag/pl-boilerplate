@@ -64,15 +64,7 @@
     Description:
 */
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -ms-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
   font-smoothing: antialiased;
-  -webkit-text-rendering: optimizeLegibility;
-  -moz-text-rendering: optimizeLegibility;
-  -ms-text-rendering: optimizeLegibility;
-  -o-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
 }
 body .no-scroll {
@@ -115,9 +107,6 @@ body .no-scroll {
   position: fixed;
   top: 0;
   -webkit-transition: opacity 375ms;
-  -moz-transition: opacity 375ms;
-  -ms-transition: opacity 375ms;
-  -o-transition: opacity 375ms;
   transition: opacity 375ms;
   width: 100%;
   z-index: 99;
@@ -127,15 +116,11 @@ body .no-scroll {
 }
 .blurry {
   -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -ms-filter: blur(3px);
-  -o-filter: blur(3px);
-  filter: blur(3px);
-  -webkit-transition: filter 375ms;
-  -moz-transition: filter 375ms;
-  -ms-transition: filter 375ms;
-  -o-transition: filter 375ms;
+          filter: blur(3px);
+  -webkit-transition: -webkit-filter 375ms;
+  transition: -webkit-filter 375ms;
   transition: filter 375ms;
+  transition: filter 375ms, -webkit-filter 375ms;
 }
 /* Outer wrapper */
 .outer-wrapper {
@@ -160,9 +145,6 @@ body .no-scroll {
   .outer-wrapper {
     right: 0;
     -webkit-transition: right 350ms;
-    -moz-transition: right 350ms;
-    -ms-transition: right 350ms;
-    -o-transition: right 350ms;
     transition: right 350ms;
   }
   .outer-wrapper .mobile-navigation-open {
@@ -183,14 +165,10 @@ body .no-scroll {
     Author     : cesarmejia
     Description:
 */
-/* Navigation */
 .navigation {
   background-color: #fff;
-  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
-  -ms-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
-  -o-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
-  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.15);
+          box-shadow: 0 2px 2px rgba(0,0,0,0.15);
   height: 70px;
   padding: 10px 0;
   position: fixed;
@@ -242,9 +220,6 @@ body .no-scroll {
 @media (max-width: 767px) {
   .navigation {
     -webkit-transition: right 350ms;
-    -moz-transition: right 350ms;
-    -ms-transition: right 350ms;
-    -o-transition: right 350ms;
     transition: right 350ms;
   }
   .navigation.mobile-navigation-open {
