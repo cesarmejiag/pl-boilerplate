@@ -299,7 +299,7 @@ var ContactForm = (function(w) {
          * Reset form inputs.
          */
         resetFormInputs: function() {
-            this.getInputs($form).val('');
+            this.$form.get(0).reset();
         }
 
     };

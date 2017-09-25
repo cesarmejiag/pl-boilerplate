@@ -4,7 +4,7 @@
 
 'use strict';
 
-var general = {
+var Page = {
 
     /**
      * @type {jQuery}
@@ -22,17 +22,13 @@ var general = {
     init: function() {
 
         // Initialize page parts.
-        general.MobileNavigation.init();
-        general.Navigation.init();
-        general.OuterWrapper.init();
-        
-        // Initialize contact form.
-        new ContactForm( $('.contact-form') );
+        Page.Navigation.init();
+        Page.Contact.init();
 
         // Events
-        general.$window.on('load', function() { general._onLoad(); });
-        general.$window.on('resize', function() { general._onResize(); });
-        general.$window.on('scroll', function() { general._onScroll(); });
+        Page.$window.on('load', function() { Page._onLoad(); });
+        Page.$window.on('resize', function() { Page._onResize(); });
+        Page.$window.on('scroll', function() { Page._onScroll(); });
     },
 
     /**
@@ -104,100 +100,83 @@ var general = {
     },
 
     /**
-     * MobileNavigation.
-     */
-    MobileNavigation: {
-        /**
-         * @type jQuery
-         */
-        elem: null,
-
-        /**
-         * Initialize page part.
-         */
-        init: function() {
-            this.elem = $('.mobile-navigation');
-
-            if(this.elem.length) {
-
-            }
-        }
-    },
-
-    /**
      * Navigation.
      */
     Navigation: {
         /**
          * @type jQuery
          */
-        elem: null,
+        $closeListBtn: null,
 
         /**
          * @type jQuery
          */
-        toggleBtn: null,
+        $elem: null,
+
+        /**
+         * @type jQuery
+         */
+        $list: null,
+
+        /**
+         * @type jQuery
+         */
+        $toggleBtn: null,
 
         /**
          * Initialize page part.
          */
         init: function() {
-            this.elem = $('.navigation');
+            this.$elem = $('.navigation');
 
-            if(this.elem.length) {
-                var _this = this;
-                this.toggleBtn = this.elem.find('.toggle-btn');
+            if(this.$elem.length) {
+                this.$listWrapper = this.$elem.find('.list-wrapper');
+                this.$closeListBtn = this.$elem.find('.close-list-btn');
+                this.$toggleBtn = this.$elem.find('.toggle-btn');
 
-                this.toggleBtn.on('click', function() { _this.openMobileNavigation(); });
+                this.toggleCollapsed = this.toggleCollapsed.bind(this);
+
+                this.$closeListBtn.on('click', this.toggleCollapsed);
+                this.$toggleBtn.on('click', this.toggleCollapsed);
             }
         },
 
         /**
-         * 
+         * Show or hide mobile navigation.
          */
-        openMobileNavigation: function() {
-            var elems = [
-                general.MobileNavigation.elem,
-                general.Navigation.elem,
-                general.OuterWrapper.elem,
-                general.$body,
-
-                this.toggleBtn
-            ];
-
-            for (var i = 0; i < elems.length; i++) {
-                var elem = elems[i];
-
-                if (this.toggleBtn.hasClass('mobile-navigation-open')) {
-                    elem.removeClass('mobile-navigation-open');
-                } else {
-                    elem.addClass('mobile-navigation-open');
-                }
+        toggleCollapsed: function() {
+            if (this.$listWrapper.hasClass('list-collapsed')) {
+                this.$listWrapper.removeClass('list-collapsed');
+                Page.$body.removeClass('no-scroll');
+            } else {
+                this.$listWrapper.addClass('list-collapsed');
+                Page.$body.addClass('no-scroll');
             }
         }
     },
 
     /**
-     * OuterWrapper.
+     * Contact
      */
-    OuterWrapper: {
+    Contact: {
         /**
          * @type jQuery
          */
-        elem: null,
+        $elem: null,
 
         /**
          * Initialize page part.
          */
         init: function() {
-            this.elem = $('.outer-wrapper');
+            this.$elem = $('.contact');
 
-            if(this.elem.length) {
-
+            if(this.$elem.length) {
+                // Initialize contact form.
+                new ContactForm( $('.contact-form') );
             }
         }
     }
 
 };
 
-$(general.init);
+$(Page.init);

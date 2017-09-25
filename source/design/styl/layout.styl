@@ -8,7 +8,7 @@
 body
   font-smoothing antialiased
   text-rendering optimizeLegibility
-  .no-scroll
+  &.no-scroll
     overflow hidden
 
 
@@ -42,25 +42,6 @@ body
   display table-cell
 
 
-.page-loader 
-  background-color rgba(205, 205, 205, 0.5)
-  left 0
-  height 100%
-  opacity 0
-  position fixed
-  top 0
-  transition opacity 375ms
-  width 100%
-  z-index 99
-  &.displayed
-    opacity 1
-
-
-.blurry 
-  filter blur(3px)
-  transition filter 375ms
-
-
 /* Outer wrapper */
 .outer-wrapper 
   margin-top 75px
@@ -77,20 +58,3 @@ body
     .title
       margin-top 0
       text-align center
-
-      
-@media (max-width: 767px)
-  
-  body
-    &.mobile-navigation-open 
-      overflow hidden
-  
-
-  /* Outer wrapper */
-  .outer-wrapper 
-    right 0
-    transition right 350ms
-
-    .mobile-navigation-open
-      right 250px
-  

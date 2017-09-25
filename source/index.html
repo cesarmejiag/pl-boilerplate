@@ -83,7 +83,7 @@
     </head>
     <body>
 
-        <!-- Main navigation -->
+        <!-- Navigation -->
         <nav class="navigation">
             <div class="holder">
                 <div class="container-fluid">
@@ -92,11 +92,15 @@
                         <img alt="Goplek - Web Studio" class="img-responsive" src="design/imgs/logo.svg">
                     </a>
 
-                    <!-- Navigation List -->
-                    <ul class="list hidden-xs">
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
+                    <!-- List Wrapper -->
+                    <div class="list-wrapper">
+                        <button class="close-list-btn visible-xs">x</button>
+
+                        <ul class="list">
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
 
                     <!-- Toggle Button -->
                     <button class="toggle-btn visible-xs">
@@ -194,7 +198,7 @@
         <!-- Include jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Contact Script (dev) -->
-        <script src="design/js/jquery.contact-form.js"></script>
+        <script src="design/js/pl-contact-form.js"></script>
         <!-- Page Scripts (dev) -->
         <script src="design/js/scripts.js"></script>
         <!-- Page Scripts (production) -->

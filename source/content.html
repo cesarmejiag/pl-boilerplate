@@ -58,12 +58,8 @@
 
         <!-- Bootstrap Styles -->
         <link href="design/css/vendor/bootstrap.css" rel="stylesheet">
-        <!-- Page Fonts (dev) -->
-        <link href="design/css/fonts.css" rel="stylesheet">
         <!-- Page Styles (dev) -->
         <link href="design/css/styles.css" rel="stylesheet">
-        <!-- Page Styles Responsive (dev) -->
-        <link href="design/css/styles-responsive.css" rel="stylesheet">
         <!-- Page Styles (production) -->
         <!-- <link href="design/css/styles.min.css" rel="stylesheet"> -->
 
@@ -87,23 +83,7 @@
     </head>
     <body>
 
-        <!-- Mobile navigation -->
-        <nav class="mobile-navigation visible-xs">
-            <div class="inner">
-                <!-- Logo -->
-                <a class="logo" href="/">
-                    <img alt="Goplek - Web Studio" class="img-responsive" src="design/imgs/logo.svg">
-                </a>
-
-                <!-- Navigation List -->
-                <ul class="list">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Main navigation -->
+        <!-- Navigation -->
         <nav class="navigation">
             <div class="holder">
                 <div class="container-fluid">
@@ -112,11 +92,15 @@
                         <img alt="Goplek - Web Studio" class="img-responsive" src="design/imgs/logo.svg">
                     </a>
 
-                    <!-- Navigation List -->
-                    <ul class="list hidden-xs">
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
+                    <!-- List Wrapper -->
+                    <div class="list-wrapper">
+                        <button class="close-list-btn visible-xs">x</button>
+
+                        <ul class="list">
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
 
                     <!-- Toggle Button -->
                     <button class="toggle-btn visible-xs">

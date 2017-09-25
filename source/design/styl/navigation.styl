@@ -31,13 +31,13 @@
     padding 0
     text-align right
 
-  li
-    display inline
-    margin-left 25px
+    li
+      display inline
+      margin-left 25px
 
-  a
-    color #666
-    line-height 46px
+    a
+      color #666
+      line-height 46px
 
 
   /* Navigation - Toggle Button */
@@ -50,19 +50,51 @@
     width 50px
 
     .bar
-      background-color #333
+      background-color #666
       display block
       height 3px
-      margin-bottom 4px
+      margin-bottom 5px
       width 100%
       &:last-child
         margin-bottom 0
 
 
 @media (max-width: 767px)
-  /* Navigation */
+
   .navigation
-    transition right 350ms
-    &.mobile-navigation-open
-      right 250px
-  
+    .list-wrapper
+      background-color #fff
+      height 100%
+      left 0
+      opacity 0
+      padding 50px 20px 20px
+      position fixed
+      transform translateY(-100%)
+      transition opacity 375ms, transform 375ms
+      top 0
+      width 100%
+      &.list-collapsed
+        opacity 1
+        transform translateY(0)
+
+      .close-list-btn
+        background transparent
+        border none
+        color #666
+        font-size 20px
+        line-height 30px
+        padding 0
+        position absolute
+        text-align center
+        text-transform uppercase
+        right 10px
+        top 10px
+        width 30px
+
+    .list
+      li
+        display block
+
+      a
+        font-size 20px
+        text-decoration none
