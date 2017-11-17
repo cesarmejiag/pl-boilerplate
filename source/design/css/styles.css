@@ -1,70 +1,19 @@
 /*
-    Document   : contact.styl
-    Created on : 21/09/2017, 07:050:15 PM
-    Author     : cesarmejia
-    Description:
-*/
-/* Override Holder */
-.contact > .holder {
-  max-width: 680px;
-}
-.contact .contact-info {
-  margin-bottom: 35px;
-}
-.contact .contact-form {
-  min-height: 150px;
-}
-.contact .contact-form input[type=text],
-.contact .contact-form textarea {
-  border: 1px solid #dcdcdc;
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-}
-.contact .contact-form textarea {
-  height: 125px;
-  resize: none;
-}
-.contact .contact-form input[type=submit] {
-  background-color: #dcdcdc;
-  border: none;
-  color: #666;
-  cursor: pointer;
-  display: block;
-  margin-left: auto;
-  max-width: 180px;
-  padding: 5px;
-  text-align: center;
-  width: 100%;
-}
-
-/*
-    Document   : footer.styl
-    Created on : 21/09/2017, 07:050:15 PM
-    Author     : cesarmejia
-    Description:
-*/
-.footer {
-  background-color: #f1f1f1;
-  color: #9a9a9a;
-  font-size: 11px;
-  padding: 15px 0;
-}
-.footer .goplek-logo {
-  display: block;
-  margin-left: auto;
-  width: 50px;
-}
-
-/*
     Document   : layout.styl
     Created on : 21/09/2017, 07:050:15 PM
     Author     : cesarmejia
     Description:
 */
 body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
   font-smoothing: antialiased;
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
 }
 body.no-scroll {
@@ -122,6 +71,89 @@ body.no-scroll {
     Author     : cesarmejia
     Description:
 */
+
+/*
+    Document   : contact.styl
+    Created on : 21/09/2017, 07:050:15 PM
+    Author     : cesarmejia
+    Description:
+*/
+/* Override Holder */
+.contact > .holder {
+  max-width: 680px;
+}
+.contact .contact-info {
+  margin-bottom: 35px;
+}
+.contact .contact-form {
+  min-height: 150px;
+/* Chrome/Opera/Safari */
+/* Firefox 19+ */
+/* IE 10+ */
+/* Firefox 18- */
+}
+.contact .contact-form ::-webkit-input-placeholder {
+  color: #999;
+}
+.contact .contact-form ::-moz-placeholder {
+  color: #999;
+}
+.contact .contact-form :-ms-input-placeholder {
+  color: #999;
+}
+.contact .contact-form :-moz-placeholder {
+  color: #999;
+}
+.contact .contact-form input[type=text],
+.contact .contact-form textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #dcdcdc;
+  border-radius: 0;
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+}
+.contact .contact-form textarea {
+  height: 125px;
+  resize: none;
+}
+.contact .contact-form input[type=submit] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #dcdcdc;
+  border: none;
+  border-radius: 0;
+  color: #666;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  max-width: 180px;
+  padding: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+/*
+    Document   : footer.styl
+    Created on : 21/09/2017, 07:050:15 PM
+    Author     : cesarmejia
+    Description:
+*/
+.footer {
+  background-color: #f1f1f1;
+  color: #9a9a9a;
+  font-size: 11px;
+  padding: 15px 0;
+}
+.footer .goplek-logo {
+  display: block;
+  margin-left: auto;
+  width: 50px;
+}
 
 /*
     Document   : navigation.styl

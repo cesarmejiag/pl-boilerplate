@@ -20,9 +20,25 @@
   .contact-form
     min-height 150px
 
+    /* Chrome/Opera/Safari */
+    ::-webkit-input-placeholder
+      color #999
+    /* Firefox 19+ */
+    ::-moz-placeholder
+      color #999
+    /* IE 10+ */
+    :-ms-input-placeholder
+      color #999
+    /* Firefox 18- */
+    :-moz-placeholder
+      color #999
+
+
     input[type=text],
     textarea
+      appearance none
       border 1px solid #dcdcdc
+      border-radius 0
       display block
       margin-bottom 10px
       padding 5px
@@ -33,8 +49,10 @@
       resize none
 
     input[type=submit]
+      appearance none
       background-color #dcdcdc
       border none
+      border-radius 0
       color #666
       cursor pointer
       display block

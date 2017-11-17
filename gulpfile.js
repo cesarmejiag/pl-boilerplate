@@ -42,7 +42,7 @@ const destPath = {
 /**
  * Reload on change.
  */
-gulp.task('reload', ['stylus'], () => {
+gulp.task('reload', ['js', 'stylus'], () => {
     gulp.src(srcPath.root)
         .pipe(livereload());
 });
@@ -56,15 +56,13 @@ gulp.task('watch', () => {
     // Files to be watched.
     let files = [
         `${srcPath.root}*.html`,
-        // Avoid watch for css and styl files at same time to prevent double reload.
-        // `${srcPath.css}**/*.css`,
         `${srcPath.styl}**/*.styl`,
         `${srcPath.js}**/*.js`
     ];
 
     livereload.listen();
 
-    gulp.watch(files, ['stylus', 'reload']);
+    gulp.watch(files, ['reload']);
 });
 
 
