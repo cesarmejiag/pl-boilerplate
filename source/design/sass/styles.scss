@@ -1,0 +1,12 @@
+
+body {
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+
+@import "components/navigation";
+@import "components/footer";
+
+@import "sections/contact";
