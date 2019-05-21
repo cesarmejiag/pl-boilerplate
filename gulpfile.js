@@ -3,6 +3,7 @@ const { src, dest, watch, series } = require( 'gulp' )
     , autoprefixer = require( 'gulp-autoprefixer' )
     , uglify       = require( 'gulp-uglify' )
     , concat       = require( 'gulp-concat' )
+    , typescript   = require( 'gulp-typescript' )
     , babel        = require( 'gulp-babel' )
     , favicons     = require( 'gulp-favicons' )
     , webp         = require( 'gulp-webp' )
@@ -10,11 +11,12 @@ const { src, dest, watch, series } = require( 'gulp' )
 
 
 const srcPath = {
-    fonts  : 'source/design/fonts'  ,
-    images : 'source/design/images' ,
-    scripts: 'source/design/scripts',
-    sass   : 'source/design/sass'   ,
-    root   : 'source'
+    fonts     : 'source/fonts'     ,
+    images    : 'source/images'    ,
+    scripts   : 'source/scripts'   ,
+    sass      : 'source/sass'      ,
+    typescript: 'source/typescript',
+    root      : 'source'
 }
 
 const destPath = {
@@ -134,6 +136,21 @@ function scripts ( callback ) {
 
 
 /**
+ * Compiles ts files to generate production scripts.
+ * @param {function} callback 
+ */
+function ts ( callback ) {
+    const files = [
+        `${ srcPath.typescript }/*.ts`
+    ];
+
+    return src( files )
+        .pipe( typescript() )
+        .pipe( dest( `${ destPath.scripts }` ) )
+}
+
+
+/**
  * Handle watch event.
  * @param {function} callback 
  */
@@ -169,8 +186,9 @@ exports.favico = favico
 exports.fonts = fonts
 exports.images = images
 exports.styles = styles
-exports.scripts = scripts
+// exports.scripts = scripts
+exports.ts = ts
 exports.watcher = watcher
 exports.webpImages = webpImages
 
-exports.build = series( favico, fonts, images, styles, scripts )
+exports.build = series( favico, fonts, images, styles, ts )
