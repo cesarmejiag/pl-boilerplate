@@ -1,12 +1,12 @@
 const { src, dest, watch, series } = require( 'gulp' )
-
-const sass = require( 'gulp-sass' )
+    , sass         = require( 'gulp-sass' )
     , autoprefixer = require( 'gulp-autoprefixer' )
-    , uglify = require( 'gulp-uglify' )
-    , concat = require( 'gulp-concat' )
-    , babel = require( 'gulp-babel' )
-    , favicons = require( 'gulp-favicons' )
-    , livereload = require( 'gulp-livereload' )
+    , uglify       = require( 'gulp-uglify' )
+    , concat       = require( 'gulp-concat' )
+    , babel        = require( 'gulp-babel' )
+    , favicons     = require( 'gulp-favicons' )
+    , webp         = require( 'gulp-webp' )
+    , livereload   = require( 'gulp-livereload' )
 
 
 const srcPath = {
@@ -30,7 +30,7 @@ const destPath = {
  * Generate favicons for all devices.
  * @param {function} callback 
  */
-function favico (callback) {
+function favico ( callback ) {
     const faviconsSettings = {
         appName: "PL App",
         appShortName: "PL App",
@@ -66,6 +66,30 @@ function favico (callback) {
     return src( `${ srcPath.root }/favicon.png` )
         .pipe( favicons( faviconsSettings ) )
         .pipe( dest(`${ destPath.root }/favicons`) )
+}
+
+
+/**
+ * Copy fonts to production folder.
+ * @param {function} callback 
+ */
+function fonts ( callback ) {
+    const files = `${ srcPath.fonts }/*.{eot,woff,woff2,ttf,svg,otf}`
+
+    return src( files )
+        .pipe( dest( `${ destPath.fonts }` ) )
+}
+
+
+/**
+ * Copy images to production folder.
+ * @param {function} callback 
+ */
+function images ( callback ) {
+    const files = `${ srcPath.images }/**.{jpg,jpeg,png,svg,webp}`
+
+    return src( files )
+        .pipe( dest( `${ destPath.images }` ) )
 }
 
 
@@ -113,21 +137,40 @@ function scripts ( callback ) {
  * Handle watch event.
  * @param {function} callback 
  */
-function watcher (callback) {
+function watcher ( callback ) {
     const files = [
         `${ srcPath.fonts }/**/*.{otf,ttf,woff,svg}`,
         `${ srcPath.imgs }/**/*.{jpg,jpeg,svg,png}`,
         `${ srcPath.sass }/**/*.scss`,
         `${ srcPath.scripts }/**/*.js`
-    ];
+    ]
 
     livereload.listen()
 
-    return watch( files, series( styles, scripts ) );
+    return watch( files, series( styles, scripts ) )
+}
+
+
+/**
+ * Copy images to production folder.
+ * @param {function} callback 
+ */
+function webpImages ( callback ) {
+    const files = `${ srcPath.images }/**/*.{jpg,jpge,png,tiff,webp}`
+
+    return src( `${ files }` )
+        .pipe( webp(  ) )
+        .pipe( `${ destPath.images }` )
+
 }
 
 
 exports.favico = favico
+exports.fonts = fonts
+exports.images = images
 exports.styles = styles
 exports.scripts = scripts
 exports.watcher = watcher
+exports.webpImages = webpImages
+
+exports.build = series( favico, fonts, images, styles, scripts )
