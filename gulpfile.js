@@ -141,16 +141,22 @@ function scripts ( callback ) {
  */
 function typescript ( callback ) {
     const files = [
-        `${ srcPath.ts }/scripts.ts`
+        `${ srcPath.ts }/**/*.ts`
     ]
 
     const tsSettings = {
         allowJs: true,
+        module: 'amd',
+        outDir: `${ destPath.scripts }`,
+        outFile: `scripts.js`,
+        rootDir: `${ srcPath.ts }`,
+        sourceMap: true,
         target: 'ES5'
     }
 
     return src( files )
         .pipe( ts( tsSettings ) )
+        .pipe( uglify() )
         .pipe( dest( `${ destPath.scripts }` ) )
 }
 
