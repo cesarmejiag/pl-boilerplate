@@ -124,7 +124,7 @@ function typescript ( callback ) {
         `${ srcPath.ts }/script-2.ts`,
         `${ srcPath.ts }/scripts.ts`
     ]
-    
+
     const settings = {
         allowJs: true,
         module: 'amd',
@@ -137,7 +137,7 @@ function typescript ( callback ) {
 
     return src( files )
         .pipe( ts( settings ) )
-        // .pipe( uglify( ) )
+        .pipe( uglify( ) )
         .pipe( dest( `${ destPath.scripts }` ) )
 }
 
@@ -151,12 +151,12 @@ function watcher ( callback ) {
         `${ srcPath.fonts }/**/*.{otf,ttf,woff,svg}`,
         `${ srcPath.imgs }/**/*.{jpg,jpeg,svg,png}`,
         `${ srcPath.sass }/**/*.scss`,
-        `${ srcPath.scripts }/**/*.js`
+        `${ srcPath.ts }/**/*.ts`
     ]
 
     livereload.listen()
 
-    return watch( files, series( styles, scripts ) )
+    return watch( files, series( styles, typescript ) )
 }
 
 
