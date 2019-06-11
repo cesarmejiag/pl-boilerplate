@@ -121,7 +121,6 @@ function scss ( callback ) {
  */
 function typescript ( callback ) {
     const files = [
-        `${ srcPath.ts }/script-2.ts`,
         `${ srcPath.ts }/scripts.ts`
     ]
 
