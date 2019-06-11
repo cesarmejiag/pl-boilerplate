@@ -5,12 +5,8 @@
   "main": "",
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-concat": "^2.6.1",
     "gulp-favicons": "^2.3.0",
     "gulp-livereload": "^4.0.1",
     "gulp-sass": "^4.0.2",

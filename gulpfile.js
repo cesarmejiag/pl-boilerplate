@@ -2,9 +2,7 @@ const { src, dest, watch, series } = require( 'gulp' )
     , sass         = require( 'gulp-sass' )
     , autoprefixer = require( 'gulp-autoprefixer' )
     , uglify       = require( 'gulp-uglify' )
-    , concat       = require( 'gulp-concat' )
     , ts           = require( 'gulp-typescript' )
-    , babel        = require( 'gulp-babel' )
     , favicons     = require( 'gulp-favicons' )
     , webp         = require( 'gulp-webp' )
     , livereload   = require( 'gulp-livereload' )
@@ -33,7 +31,7 @@ const destPath = {
  * @param {function} callback 
  */
 function favico ( callback ) {
-    const faviconsSettings = {
+    const settings = {
         appName: "PL App",
         appShortName: "PL App",
         appDescription: "This is an App created with pl-boilerplate",
@@ -66,7 +64,7 @@ function favico ( callback ) {
     }
 
     return src( `${ srcPath.root }/favicon.png` )
-        .pipe( favicons( faviconsSettings ) )
+        .pipe( favicons( settings ) )
         .pipe( dest(`${ destPath.root }/favicons`) )
 }
 
@@ -118,33 +116,16 @@ function styles ( callback ) {
 
 
 /**
- * Compiles js files to generate production scripts.
- * @param {function} callback 
- */
-function scripts ( callback ) {
-    const babelSettings = {
-        presets: [ '@babel/env' ]
-    }
-
-    return src( `${ srcPath.scripts }/scripts.js` )
-        .pipe( babel( babelSettings ) )
-        .pipe( uglify(  ) )
-        .pipe( concat( `scripts.js` ) )
-        .pipe( dest( `${ destPath.scripts }` ) )
-
-}
-
-
-/**
  * Compiles ts files to generate production scripts.
  * @param {function} callback 
  */
 function typescript ( callback ) {
     const files = [
-        `${ srcPath.ts }/**/*.ts`
+        `${ srcPath.ts }/script-2.ts`,
+        `${ srcPath.ts }/scripts.ts`
     ]
-
-    const tsSettings = {
+    
+    const settings = {
         allowJs: true,
         module: 'amd',
         outDir: `${ destPath.scripts }`,
@@ -155,8 +136,8 @@ function typescript ( callback ) {
     }
 
     return src( files )
-        .pipe( ts( tsSettings ) )
-        .pipe( uglify() )
+        .pipe( ts( settings ) )
+        // .pipe( uglify( ) )
         .pipe( dest( `${ destPath.scripts }` ) )
 }
 
@@ -197,7 +178,6 @@ exports.favico = favico
 exports.fonts = fonts
 exports.images = images
 exports.styles = styles
-// exports.scripts = scripts
 exports.typescript = typescript
 exports.watcher = watcher
 exports.webpImages = webpImages
