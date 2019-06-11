@@ -97,7 +97,7 @@ function images ( callback ) {
  * Compiles sass files to generate production styles.
  * @param {function} callback 
  */
-function styles ( callback ) {
+function scss ( callback ) {
     const sassSettings = {
         outputStyle: 'compressed'
     }
@@ -156,7 +156,7 @@ function watcher ( callback ) {
 
     livereload.listen()
 
-    return watch( files, series( styles, typescript ) )
+    return watch( files, series( scss, typescript ) )
 }
 
 
@@ -174,12 +174,12 @@ function webpImages ( callback ) {
 }
 
 
-exports.favico = favico
-exports.fonts = fonts
-exports.images = images
-exports.styles = styles
+exports.favico     = favico
+exports.fonts      = fonts
+exports.images     = images
+exports.scss       = scss
 exports.typescript = typescript
-exports.watcher = watcher
+exports.watcher    = watcher
 exports.webpImages = webpImages
 
-exports.build = series( favico, fonts, images, styles, typescript )
+exports.build = series( favico, fonts, images, scss, typescript )
