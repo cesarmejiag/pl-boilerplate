@@ -1,42 +1,42 @@
-const { src, dest, watch, series } = require("gulp"),
-  autoprefixer = require("gulp-autoprefixer"),
-  browserify = require("browserify"),
-  buffer = require("vinyl-buffer"),
-  favicons = require("gulp-favicons"),
-  livereload = require("gulp-livereload"),
-  sass = require("gulp-sass"),
-  source = require("vinyl-source-stream"),
-  sourcemaps = require("gulp-sourcemaps"),
-  tsify = require("tsify"),
-  uglify = require("gulp-uglify"),
-  webp = require("gulp-webp");
+const { src, dest, watch, series } = require("gulp")
+  , autoprefixer = require("gulp-autoprefixer")
+  , browserify = require("browserify")
+  , buffer = require("vinyl-buffer")
+  , favicons = require("gulp-favicons")
+  , livereload = require("gulp-livereload")
+  , rename = require("gulp-rename")
+  , sass = require("gulp-sass")
+  , source = require("vinyl-source-stream")
+  , sourcemaps = require("gulp-sourcemaps")
+  , tsify = require("tsify")
+  , uglify = require("gulp-uglify")
+  , webp = require("gulp-webp");
 
 const srcPath = {
   fonts: "src/fonts",
   images: "src/images",
   scripts: "src/scripts",
-  sass: "src/sass",
-  ts: "src/typescript",
+  styles: "src/styles",
   root: "src",
 };
 
 const destPath = {
-  styles: "public/design/styles",
+  css: "public/design/css",
   fonts: "public/design/fonts",
-  images: "public/design/images",
-  scripts: "public/design/scripts",
+  images: "public/design/imgs",
+  js: "public/design/js",
   root: "public",
 };
 
 /**
  * Generate favicons for all devices.
- * @param {function} callback
+ * @param {function} cb
  */
-function favico(callback) {
+function favico() {
   const settings = {
-    appName: "PL App",
-    appShortName: "PL App",
-    appDescription: "This is an App created with pl-boilerplate",
+    appName: "PL Web App",
+    appShortName: "PL Web App",
+    appDescription: "This is a Web App created with pl-boilerplate",
     developerName: "César Mejía",
     developerURL: "http://cesarmejia.me/",
     background: "#020307",
@@ -72,49 +72,54 @@ function favico(callback) {
 
 /**
  * Copy fonts to production folder.
- * @param {function} callback
+ * @param {function} cb
  */
-function fonts(callback) {
+function fonts() {
   const files = `${srcPath.fonts}/*.{eot,woff,woff2,ttf,svg,otf}`;
-
   return src(files).pipe(dest(`${destPath.fonts}`));
 }
 
 /**
  * Copy images to production folder.
- * @param {function} callback
+ * @param {function} cb
  */
-function images(callback) {
+function images() {
   const files = `${srcPath.images}/**.{jpg,jpeg,png,svg,webp}`;
-
   return src(files).pipe(dest(`${destPath.images}`));
 }
 
 /**
  * Compiles sass files to generate production styles.
- * @param {function} callback
+ * @param {function} cb
  */
-function styles(callback) {
+function styles() {
   const sassSettings = {
     outputStyle: "compressed",
   };
 
   const autoprefixerSettings = {
-    browsers: ["last 2 versions"],
     cascade: false,
   };
 
-  return src(`${srcPath.sass}/styles.scss`)
+  const renameSettings = {
+    basename: "styles.min",
+    extname: ".css"
+  };
+
+  return src(`${srcPath.styles}/styles.scss`)
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sass(sassSettings))
     .pipe(autoprefixer(autoprefixerSettings))
-    .pipe(dest(`${destPath.styles}`));
+    .pipe(rename(renameSettings))
+    .pipe(sourcemaps.write("./"))
+    .pipe(dest(`${destPath.css}`));
 }
 
 /**
  * Compiles and minify scripts.
  * @param {function} callback
  */
-function scripts(callback) {
+function scripts() {
   const init = {
     basedir: ".",
     debug: true,
@@ -123,45 +128,41 @@ function scripts(callback) {
 
   return (
     browserify(init)
-      .plugin(tsify, { target: "es2015" })
-      .transform("babelify", {
-        presets: ["@babel/preset-env"],
-      })
+      // .plugin(tsify, { target: "es2015" }) // Use if proyect is developed with typescript
+      .plugin(tsify, { target: "es5" })
+      .transform("babelify", { presets: ["@babel/preset-env"],})
       .bundle()
-      .pipe(source("bundle.min.js"))
+      .pipe(source("scripts.min.js"))
       .pipe(buffer())
       .pipe(sourcemaps.init({ loadMaps: true }))
-      // .pipe(uglify())
+      .pipe(uglify())
       .pipe(sourcemaps.write("./"))
-      .pipe(dest("dist"))
+      .pipe(dest(`${destPath.js}`))
   );
 }
 
 /**
  * Handle watch event.
- * @param {function} callback
+ * @param {function} cb
  */
-function watcher(callback) {
+function watcher() {
   const files = [
-    // `${srcPath.fonts}/**/*.{otf,ttf,woff,svg}`,
-    // `${srcPath.imgs}/**/*.{jpg,jpeg,svg,png}`,
-    // `${srcPath.sass}/**/*.scss`,
+    `${srcPath.fonts}/**/*.{otf,ttf,woff,svg}`,
+    `${srcPath.images}/**/*.{jpg,jpeg,svg,png}`,
+    `${srcPath.styles}/**/*.scss`,
     `${srcPath.scripts}/**/*.{ts,js}`,
   ];
 
   livereload.listen();
-
-  // return watch(files, series(styles, scripts));
-  return watch(files, series(scripts));
+  return watch(files, series(styles, scripts));
 }
 
 /**
  * Copy images to production folder.
- * @param {function} callback
+ * @param {function} cb
  */
-function webpImages(callback) {
+function webpImages() {
   const files = `${srcPath.images}/**/*.{jpg,jpge,png,tiff,webp}`;
-
   return src(`${files}`).pipe(webp()).pipe(`${destPath.images}`);
 }
 
