@@ -23,7 +23,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {
-    "web-server": "http-server ./dist -a 127.0.0.1 -p 3101 -o",
+    "web-server": "http-server ./public -a 127.0.0.1 -p 3101 -o",
     "build": "gulp build",
     "watcher": "gulp watcher"
   },

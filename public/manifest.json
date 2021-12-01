@@ -2,20 +2,20 @@
   "name": "PL Boilerplate",
   "short_name": "PL Boilerplate",
   "icons": [{
-        "src": "images/touch/icon-128x128.png",
-        "sizes": "128x128",
+        "src": "favicons/apple-touch-icon-120x120.png",
+        "sizes": "120x120",
         "type": "image/png"
       }, {
-        "src": "images/touch/apple-touch-icon.png",
+        "src": "favicons/apple-touch-icon-152x152.png",
         "sizes": "152x152",
         "type": "image/png"
       }, {
-        "src": "images/touch/ms-touch-icon-144x144-precomposed.png",
-        "sizes": "144x144",
+        "src": "favicons/apple-touch-icon-180x180.png",
+        "sizes": "180x180",
         "type": "image/png"
       }, {
-        "src": "images/touch/chrome-touch-icon-192x192.png",
-        "sizes": "192x192",
+        "src": "favicons/apple-touch-icon-1024x1024.png",
+        "sizes": "1024x1024",
         "type": "image/png"
       }],
   "start_url": "/index.html",
