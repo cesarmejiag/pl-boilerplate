@@ -123,7 +123,7 @@ function scripts() {
   const init = {
     basedir: ".",
     debug: true,
-    entries: ["src/scripts/scripts.js"],
+    entries: [`${srcPath.scripts}/scripts.js`],
   };
 
   return (
@@ -139,6 +139,15 @@ function scripts() {
       .pipe(sourcemaps.write("./"))
       .pipe(dest(`${destPath.js}`))
   );
+}
+
+/**
+ * Minify and copy vendors.
+ * @param {function} cb
+ */
+ function vendors() {
+  const files = `${srcPath.scripts}/vendor/**/*.js`;
+  return src(files).pipe(dest(`${destPath.js}/vendor`));
 }
 
 /**
@@ -171,7 +180,8 @@ exports.fonts = fonts;
 exports.images = images;
 exports.styles = styles;
 exports.scripts = scripts;
+exports.vendors = vendors;
 exports.watcher = watcher;
 exports.webpImages = webpImages;
 
-exports.build = series(favico, fonts, images, styles, scripts);
+exports.build = series(favico, fonts, images, styles, scripts, vendors);

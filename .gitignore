@@ -13,6 +13,7 @@ build
 
 # public
 public/design
+public/favicons
 
 # misc
 .DS_Store
